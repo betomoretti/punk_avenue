@@ -4,8 +4,12 @@ To start:
 
 1. npm install
 2. npm start
+3. npm run start:worker
 
 Note: Docker compose can be used for start mongo: `docker-compose up -d`
+
+To run seeds:
+`node utils/seeds.js`
 
 To run test:
 

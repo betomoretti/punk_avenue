@@ -5,9 +5,11 @@ const weatherSync = require('./weathersSync')
 
 // run job every 20 seconds for testing purposes
 
+console.info('Scheduling job')
+
 setUp()
   .then(() => {
-    const j = schedule.scheduleJob('*/5 * * * * *', async () => {
+    const j = schedule.scheduleJob('* * */1 * * *', async () => {
       await stationSync()
       await weatherSync()
     });
