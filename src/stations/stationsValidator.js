@@ -3,6 +3,10 @@ module.exports.getValidator = ({at}) => {
     return Error('You must send an at query param')
   }
 
+  if (!Date.parse(at)) {
+    return Error('You must send a valid UTC date.')
+  }
+
   return false
 }
 
