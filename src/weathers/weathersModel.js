@@ -1,7 +1,8 @@
 const mongoose = require('mongoose')
 
 const weatherSchema = new mongoose.Schema({
-  list: []
+  coord: {},
+  main: {}
 }, {
   timestamps: true
 })
