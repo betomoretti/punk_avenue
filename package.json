@@ -1,0 +1,31 @@
+{
+  "name": "boilerplate-node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "start:dev": "nodemon --inspect index.js",
+    "start:worker": "node worker/index.js",
+    "test": "npx jest --detectOpenHandles",
+    "test:watch": "npx jest --runInBand --watchAll"
+  },
+  "keywords": [],
+  "author": "Mariano Moretti",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "mongoose": "^5.3.14",
+    "node-schedule": "^1.3.1",
+    "request": "^2.88.0",
+    "supertest": "^3.3.0"
+  },
+  "devDependencies": {
+    "jest": "^23.6.0",
+    "nodemon": "^1.18.7"
+  }
+}
