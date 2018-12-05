@@ -4,8 +4,8 @@ module.exports.get = ({ service, validate }) => async ({query: { at }}, res) => 
     return res.status(400).send(error.message)
   }
 
-  const data = await service.get({ at })
-  res.status(200).send({at: at, stations: data})
+  const { stations, weather } = await service.get({ at })
+  res.status(200).send({at: at, stations, weather})
 }
 
 module.exports.getByKioskId = ({ service, validate }) => async ({params: { id }, query: { at, from, to }}, res) => {

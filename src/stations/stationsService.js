@@ -1,11 +1,13 @@
 module.exports = class StationService {
-  constructor({model}) {
+  constructor({ model, weatherService }) {
     this.model = model
+    this.weatherService = weatherService
   }
 
   async get({ at }) {
-    const result = await this.model.find({ createdAt: { $gte: at } })
-    return result
+    const station = await this.model.find({ createdAt: { $gte: at } })
+    const weather = await this.weatherService.getByAt(at)
+    return { station, weather }
   }
 
   async getByKioskId({id, at, from, to}) {
@@ -13,7 +15,8 @@ module.exports = class StationService {
       'properties.kioskId': Number(id),
       createdAt: { $gte: at }
     }
-    const result = await this.model.find(query)
-    return result
+    const station = await this.model.find(query)
+    const weather = await this.weatherService.getByAt(at)
+    return { station, weather }
   }
 }
