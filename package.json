@@ -10,7 +10,7 @@
     "start": "node index.js",
     "start:dev": "nodemon --inspect index.js",
     "start:worker": "node worker/index.js",
-    "test": "npx jest --detectOpenHandles",
+    "test": "NODE_ENV=test node utils/seeds.js && npx jest --detectOpenHandles",
     "test:watch": "npx jest --runInBand --watchAll"
   },
   "keywords": [],

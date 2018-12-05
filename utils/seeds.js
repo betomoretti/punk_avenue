@@ -43,8 +43,9 @@ const data = [
   }
 ];
 
+const db = process.env.NODE_ENV == 'test' ? 'punk_avenue_test' : 'punk_avenue'
 // Connect to MongoDB via Mongoose
-seeder.connect('mongodb://localhost:27017/punk_avenue', function() {
+seeder.connect(`mongodb://localhost:27017/${db}`, function() {
 
   // Load Mongoose models
   seeder.loadModels([
