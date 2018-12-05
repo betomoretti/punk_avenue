@@ -1,10 +1,19 @@
-module.exports.get = ({ service }) => async (req, res) => {
-  const data = await service.get({ at: req.query.at })
-  res.status(200).send({at: req.query.at, stations: data})
+module.exports.get = ({ service, validate }) => async ({query: { at }}, res) => {
+  const error = validate({at})
+  if (error) {
+    return res.status(400).send(error.message)
+  }
+
+  const data = await service.get({ at })
+  res.status(200).send({at: at, stations: data})
 }
 
-module.exports.getByKioskId = ({ service }) => async (req, res) => {
-  const params = { id: req.params.id, at: req.query.at, from: req.query.from, to: req.query.to }
+module.exports.getByKioskId = ({ service, validate }) => async ({params: { id }, query: { at, from, to }}, res) => {
+  const params = { id, at, from, to }
+  const error = validate(params)
+  if (error) {
+    return res.status(400).send(error.message)
+  }
   const data = await service.getByKioskId(params)
-  res.status(200).send({at: req.query.at, stations: data})
+  res.status(200).send({at, stations: data})
 }
