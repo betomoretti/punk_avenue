@@ -2,7 +2,18 @@ const moment = require('moment')
 
 const formatters = {
   hourly: (stations) => {
+    const [first] = stations
+    const elems = stations.reduce((accu, current) => {
+      const last = accu[accu.length - 1]
+      const lastDate = last.createdAt
+      const currentDate = current.createdAt
+      if (lastDate.getHours() !== currentDate.getHours()) {
+        accu.push(current)
+      }
+      return accu
+    }, [first])
 
+    return elems
   },
   daily: (stations) => {
     const [first] = stations
