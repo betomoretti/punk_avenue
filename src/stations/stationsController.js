@@ -4,11 +4,12 @@ module.exports.get = ({ service, validate }) => async ({query: { at }}, res) => 
     return res.status(400).send(error.message)
   }
 
-  const { stations, weather } = await service.get({ at })
-  if (stations.length === 0 || weather.length === 0) {
+  const { station, weather } = await service.get({ at })
+  if (station.length === 0) {
     return res.status(404).send({})
   }
-  res.status(200).send({at, stations, weather})
+  const [ first ] = station
+  res.status(200).send({at: first.createdAt, station, weather})
 }
 
 module.exports.getByKioskId = ({ service, validate }) => async ({params: { id }, query: { at, from, to, frequency }}, res) => {
@@ -22,5 +23,6 @@ module.exports.getByKioskId = ({ service, validate }) => async ({params: { id },
   if (station.length === 0) {
     return res.status(404).send({})
   }
-  res.status(200).send({at, station, weather})
+  const [ first ] = station
+  res.status(200).send({at: first.createdAt, station, weather})
 }
