@@ -19,5 +19,9 @@ module.exports.getByKioskIdValidator = ({id, at, from, to, frequency}) => {
     return Error('You must send a valid UTC date. At least one of these params must be sended: at or from and to')
   }
 
+  if (frequency && !/(daily|hourly)/.test(frequency)) {
+    return Error('You can only send hourly or daily for the frequency param')
+  }
+
   return false
 }
