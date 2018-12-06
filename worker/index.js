@@ -9,7 +9,7 @@ console.info('Scheduling job')
 
 setUp()
   .then(() => {
-    const j = schedule.scheduleJob('* * 1 * * *', async () => {
+    const j = schedule.scheduleJob('*/60 * * * * *', async () => {
       await stationSync()
       await weatherSync()
     });
