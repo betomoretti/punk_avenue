@@ -17,7 +17,7 @@ module.exports.setUp = async () => {
 
   if (process.env.NODE_ENV === 'production') {
     try {
-      await mongoose.connect(`mongodb://localhost:27017/punk_avenue`, opts)
+      await mongoose.connect(process.env.MONGODB_URI, opts)
       mongoose.set('debug', true)
       mongoose.connection.once('open', function() {
         console.log('Connected to db...')
